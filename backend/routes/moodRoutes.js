@@ -1,22 +1,18 @@
 const express = require('express')
-const res = require('express/lib/response')
-
 const router = express.Router()
+const {
+  getMoods,
+  createMood,
+  updateMood,
+  deleteMood,
+} = require('../controllers/moodController')
 
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'get Moods' })
-})
+router.get('/', getMoods)
 
-router.post('/', (req, res) => {
-  res.status(200).json({ message: 'Create a mood' })
-})
+router.post('/', createMood)
 
-router.put('/:id', (req, res) => {
-  res.status(200).json({ message: `update your mood ${req.params.id}` })
-})
+router.put('/:id', updateMood)
 
-router.delete('/:id', (req, res) => {
-  res.status(200).json({ message: `delete your mood${req.params.id}` })
-})
+router.delete('/:id', deleteMood)
 
 module.exports = router
