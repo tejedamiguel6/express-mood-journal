@@ -6,13 +6,14 @@ const {
   updateMood,
   deleteMood,
 } = require('../controllers/moodController')
+const { protect } = require('../middleware/authMiddleware')
 
-router.get('/', getMoods)
+router.get('/', protect, getMoods)
 
-router.post('/', createMood)
+router.post('/', protect, createMood)
 
-router.put('/:id', updateMood)
+router.put('/:id', protect, updateMood)
 
-router.delete('/:id', deleteMood)
+router.delete('/:id', protect, deleteMood)
 
 module.exports = router
