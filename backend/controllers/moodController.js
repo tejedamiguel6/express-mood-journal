@@ -39,14 +39,13 @@ const updateMood = asyncHandler(async (req, res) => {
     throw new Error('That mood is not found')
   }
 
-  const user = await User.findById(req.user.id)
   // checking for user
-  if (!user) {
+  if (!req.user) {
     res.status(401)
     throw new Error('User not found')
   }
   // checking logged in user matches mood user
-  if (mood.user.toString() !== user.id) {
+  if (mood.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not authorized')
   }
@@ -67,14 +66,13 @@ const deleteMood = asyncHandler(async (req, res) => {
     throw new Error('Mood not found.')
   }
 
-  const user = await User.findById(req.user.id)
   // checking for user
-  if (!user) {
+  if (!req.user) {
     res.status(401)
     throw new Error('User not found')
   }
   // checking logged in user matches mood user
-  if (mood.user.toString() !== user.id) {
+  if (mood.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not authorized')
   }
